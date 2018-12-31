@@ -2,11 +2,18 @@ package me.texy.databindinghunter;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
+import com.intellij.psi.codeStyle.JavaCodeStyleManager;
+import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.search.searches.ReferencesSearch;
+import com.intellij.psi.xml.XmlAttribute;
+import com.intellij.psi.xml.XmlDocument;
+import com.intellij.psi.xml.XmlTag;
 import me.texy.databindinghunter.util.StringUtil;
+import org.apache.commons.lang.StringUtils;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class JavaBindingHunter {
 
@@ -16,6 +23,9 @@ public class JavaBindingHunter {
     private PsiClass mClass;
     private PsiElementFactory mElementFactory;
     private Set<String> mDataBindingImports = new HashSet<>();
+    private HashMap<String, String> mViewFields = new HashMap<>();
+
+    private Map<String, Map<String, String>> mBindingViewIdsMap = new HashMap<>();
 
     public JavaBindingHunter(PsiClass psiClass) {
         this.mClass = psiClass;
@@ -24,6 +34,8 @@ public class JavaBindingHunter {
 
     public void hunt() {
         if (mClass == null) return;
+
+        JavaCodeStyleManager.getInstance(mClass.getProject()).shortenClassReferences(mClass);
 
         searchFromImports();
 
@@ -100,7 +112,7 @@ public class JavaBindingHunter {
 
             for (String classPath : mDataBindingImports) {
                 if (statement.getText().contains(StringUtil.getClassNameFromPath(classPath))) {
-                    replaceViewBindingSubClass(dataBindingCall, classPath);
+                    replaceViewBindingMethodCall(dataBindingCall, classPath);
                     break;
                 }
             }
@@ -112,12 +124,12 @@ public class JavaBindingHunter {
         }
     }
 
-    private void replaceViewBindingSubClass(PsiMethodCallExpression dataBindingCall, String subclass) {
+    private void replaceViewBindingMethodCall(PsiMethodCallExpression dataBindingCall, String className) {
         // 1) replace 「FooBinding binding」 with 「View binding」
         replaceDeclareTypeWithView(dataBindingCall.getParent());
 
         // 2) replace DataBindingUtil/FooBinding.bind/inflate with inflater.inflate
-        replaceSubClassBindingMethodCall(dataBindingCall, subclass);
+        replaceBindingMethodCallExpression(dataBindingCall, className);
 
     }
 
@@ -135,7 +147,7 @@ public class JavaBindingHunter {
                 // field declare
                 sourceDeclare = reference.resolve();
             }
-            replaceBindingIdViews();
+            replaceAllViewRefsFromFieldBinding(viewBindingType, reference);
         }
         // FooViewBinding binding = DataBindingUtil.bind
         else if (dataBindingCallParent instanceof PsiLocalVariable) {
@@ -154,20 +166,130 @@ public class JavaBindingHunter {
         }
     }
 
-    private void replaceSubClassBindingMethodCall(PsiMethodCallExpression dataBindingCall, String subclass) {
+    /**
+     * mViewBinding.xxx -> mXxxView
+     * mViewBinding.getRoot -> mViewBinding
+     *
+     * @param viewBindingType
+     * @param viewReference
+     */
+    private void replaceAllViewRefsFromFieldBinding(PsiType viewBindingType, PsiReference viewReference) {
+        Collection<PsiReference> references = ReferencesSearch.search(viewReference.resolve(), GlobalSearchScope.projectScope(mClass.getProject())).findAll();
+        for (PsiReference r : references) {
+            PsiElement parent = r.getElement().getParent();
+            if (parent instanceof PsiReferenceExpression) {
+                PsiElement integrity = parent.getParent();
+                if (integrity.getText().endsWith(".getRoot()")) {
+                    String newText = r.getElement().getText() + "View";
+                    integrity.replace(mElementFactory.createReferenceFromText(newText, null));
+                } else if (integrity.getText().matches(".*.set.*\\)$")) {
+//                        integrity.delete();
+                } else {
+                    String newField = createViewField(viewBindingType, parent);
+                    if (newField != null) {
+                        parent.replace(mElementFactory.createReferenceFromText(newField, null));
+                    }
+                }
+            } else if (parent instanceof PsiBinaryExpression) {
+
+            }
+        }
+    }
+
+    private String createViewField(PsiType viewBindingClass, PsiElement originBindingRef) {
+        PsiElement[] children = originBindingRef.getChildren();
+        for (PsiElement child : children) {
+            if (child instanceof PsiIdentifier) {
+                String text = child.getText();
+                if (!mViewFields.containsKey(text)) {
+                    String newField;
+                    char firstChar = text.charAt(0);
+                    newField = "m" + text.replaceFirst(String.valueOf(firstChar), StringUtils.upperCase(String.valueOf(firstChar)));
+                    if (!newField.endsWith("View")) {
+                        newField += "View";
+                    }
+                    if (isFieldExist(newField)) {
+                        newField += "2";
+                    }
+                    String type = getViewTypeFromXml(viewBindingClass.getPresentableText(), StringUtil.formatCamelToUnderline(text));
+                    mClass.add(mElementFactory.createFieldFromText("\n    private " + type + " " + newField + ";", mClass));
+                    mViewFields.put(text, newField);
+                    return newField;
+                } else {
+                    return mViewFields.get(text);
+                }
+            }
+        }
+        return null;
+    }
+
+    @Nullable
+    private String getViewTypeFromXml(String viewBindingType, String id) {
+        if (mBindingViewIdsMap.containsKey(viewBindingType)) {
+
+        } else {
+            String bindingLayoutName = viewBindingType.substring(0, viewBindingType.lastIndexOf("Binding"));
+            String xmlName = StringUtil.formatCamelToUnderline(bindingLayoutName).concat(".xml");
+            PsiFile[] psiFiles = FilenameIndex.getFilesByName(mClass.getProject(), xmlName, GlobalSearchScope.allScope(mClass.getProject()));
+            PsiFile xmlFile = psiFiles[0];
+            mBindingViewIdsMap.put(viewBindingType, getIdsFromLayoutXml(xmlFile));
+        }
+        return mBindingViewIdsMap.get(viewBindingType).get(id);
+    }
+
+    private Map<String, String> getIdsFromLayoutXml(PsiElement xmlFile) {
+        HashMap<String, String> map = new HashMap<>();
+
+        for (PsiElement element : xmlFile.getChildren()) {
+            if (element instanceof XmlDocument && ((XmlDocument) element).getRootTag().getName().equals("layout")) {
+                for (PsiElement tag : element.getChildren()) {
+                    if (tag instanceof XmlTag && ((XmlTag) tag).getName().equals("layout")) {
+                        getIdsFromAttrs(tag, map);
+                    }
+                }
+            }
+        }
+        return map;
+    }
+
+    private void getIdsFromAttrs(PsiElement tag, HashMap<String, String> map) {
+        if (tag instanceof XmlTag) {
+            XmlAttribute id = ((XmlTag) tag).getAttribute("android:id", null);
+            if (id != null && id.getValue() != null) {
+                map.put(id.getValue().substring(id.getValue().indexOf("id/") + 3), ((XmlTag) tag).getName());
+            }
+            for (PsiElement child : tag.getChildren()) {
+                getIdsFromAttrs(child, map);
+            }
+        }
+    }
+
+    private boolean isFieldExist(String newField) {
+        PsiField[] fields = mClass.getFields();
+
+        for (PsiField field : fields) {
+            if (field.getText().equals(newField)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void replaceBindingMethodCallExpression(PsiMethodCallExpression dataBindingCall, String subclass) {
         String plainText = dataBindingCall.getText();
 
         String toReplace = StringUtil.getClassNameFromPath(subclass);
         if (plainText.contains(subclass)) {
             toReplace = subclass;
         }
+        PsiExpression newMethodCallElement = null;
         if (plainText.contains(toReplace + ".bind")) {
             PsiExpression[] expressions = dataBindingCall.getArgumentList().getExpressions();
             if (expressions.length != 1) {
                 System.out.print("bind method's parameters not invalid,only support bind(View view)");
                 return;
             }
-            dataBindingCall.replace(mElementFactory.createExpressionFromText(expressions[0].getText(), null));
+            newMethodCallElement = mElementFactory.createExpressionFromText(expressions[0].getText(), null);
         } else if (plainText.contains(toReplace + ".inflate")) {
             PsiExpression[] expressions = dataBindingCall.getArgumentList().getExpressions();
             StringBuilder inflateText = new StringBuilder(expressions[0].getText() + ".inflate(");
@@ -183,7 +305,7 @@ public class JavaBindingHunter {
                 }
             } else {
                 if (expressions.length != 1 && expressions.length != 3) {
-                    System.out.print("bind method's parameters not invalid,only support:" +
+                    System.out.print("inflate method's parameters not invalid,only support:" +
                             " inflate(@NonNull LayoutInflater inflater, @Nullable ViewGroup root, boolean attachToRoot) and" +
                             " inflate(@NonNull LayoutInflater inflater)");
                     return;
@@ -199,8 +321,13 @@ public class JavaBindingHunter {
                             .append(expressions[2].getText()).append(")");
                 }
             }
-            dataBindingCall.replace(mElementFactory.createExpressionFromText(inflateText.toString(), null));
+            newMethodCallElement = mElementFactory.createExpressionFromText(inflateText.toString(), null);
         }
+        if (newMethodCallElement != null) {
+            dataBindingCall.replace(newMethodCallElement);
+//            newMethodCallElement.
+        }
+
     }
 
     private void addImport(String packagePath) {
