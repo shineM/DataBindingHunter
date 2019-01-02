@@ -1,17 +1,16 @@
 <idea-plugin>
-  <id>com.your.company.unique.plugin.id</id>
-  <name>Plugin display name here</name>
+  <id>me.texy.databindinghunter</id>
+  <name>Remove DataBinding</name>
   <version>1.0</version>
-  <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+  <vendor email="zhongxinyuann@gmail.com" url="https://github.com/shineM">shineM</vendor>
 
   <description><![CDATA[
-      Enter short description for your plugin here.<br>
-      <em>most HTML tags may be used</em>
+      A plugin to help removing databinding from your Android Project.<br>
     ]]></description>
 
   <change-notes><![CDATA[
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>
+      - remove layout and data tag<br>
+      - replace DataBindingUtil.bind/inflate with LayoutInflater.inflate<br>
     ]]>
   </change-notes>
 
@@ -30,8 +29,8 @@
 
   <actions>
     <!-- Add your actions here -->
-    <action id="remove_databinding" class="me.texy.databindinghunter.action.RemoveDatabindingAction" text="me.texy.databindinghunter.action.RemoveDatabindingAction"
-            description="Remove Databinding ">
+    <action id="remove_databinding" class="me.texy.databindinghunter.action.RemoveDatabindingAction" text="Remove DataBinding"
+            description="Remove DataBinding ">
       <add-to-group group-id="CodeMenu" anchor="last"/>
     </action>
   </actions>
