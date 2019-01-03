@@ -3,34 +3,34 @@ package me.texy.databindinghunter;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
 import com.intellij.psi.codeStyle.JavaCodeStyleManager;
-import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
-import com.intellij.psi.xml.XmlAttribute;
-import com.intellij.psi.xml.XmlDocument;
-import com.intellij.psi.xml.XmlTag;
 import me.texy.databindinghunter.util.StringUtil;
 import me.texy.databindinghunter.util.ViewUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.util.TextUtils;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class JavaBindingHunter {
 
     private static final String CLASS_PATH_DATA_BINDING_UTIL = "android.databinding.DataBindingUtil";
     private static final String CLASS_NAME_DATA_BINDING_UTIL = "DataBindingUtil";
     private static final String CLASS_PATH_VIEW_DATA_BINDING = "android.databinding.ViewDataBinding";
+
+    // <DemoBinding,LayoutXmlInfo>
+    private final HashMap<String, LayoutXmlInfo> mBindingXmlInfo;
     private PsiClass mClass;
     private PsiElementFactory mElementFactory;
     private Set<String> mDataBindingImports = new HashSet<>();
     private HashMap<String, String> mViewFields = new HashMap<>();
 
-    private Map<String, Map<String, String>> mBindingViewIdsMap = new HashMap<>();
-
-    public JavaBindingHunter(PsiClass psiClass) {
+    public JavaBindingHunter(PsiClass psiClass, HashMap<String, LayoutXmlInfo> bindingLayouts) {
         this.mClass = psiClass;
+        this.mBindingXmlInfo = bindingLayouts;
         mElementFactory = JavaPsiFacade.getElementFactory(mClass.getProject());
     }
 
@@ -160,7 +160,7 @@ public class JavaBindingHunter {
             sourceDeclare = dataBindingCallParent;
             viewBindingType = ((PsiLocalVariable) dataBindingCallParent).getType();
 
-            replaceAllViewRefsFromLocalBinding(viewBindingType, (PsiLocalVariable) dataBindingCallParent);
+            replaceLocalBindingFromCodeBlock(viewBindingType, (PsiLocalVariable) dataBindingCallParent);
         }
 
         if (sourceDeclare != null && viewBindingType != null) {
@@ -177,7 +177,7 @@ public class JavaBindingHunter {
     /**
      * localBinding.xxx -> xxxView
      */
-    private void replaceAllViewRefsFromLocalBinding(PsiType viewBindingType, PsiLocalVariable localVariable) {
+    private void replaceLocalBindingFromCodeBlock(PsiType viewBindingType, PsiLocalVariable localVariable) {
         PsiElement parent = localVariable;
         String variableName = localVariable.getName();
 
@@ -185,39 +185,7 @@ public class JavaBindingHunter {
             if (parent instanceof PsiCodeBlock) {
                 HashMap<String, String> currentFDVBIs = new HashMap<>();
                 for (PsiStatement e : ((PsiCodeBlock) parent).getStatements()) {
-                    if (e.getText().contains(variableName)
-                            && !e.getText().contains(CLASS_NAME_DATA_BINDING_UTIL)
-                            && !e.getText().contains(localVariable.getType().getPresentableText())) {
-
-                        String replace = variableName;
-                        String toReplace = variableName;
-                        if (e.getText().contains(variableName + ".getRoot()")) {
-                            toReplace = variableName + ".getRoot()";
-                        } else if (e.getText().contains(variableName + ".")) {
-                            String viewRef = getViewRefNameFromText(e.getText(), variableName);
-                            String viewId = StringUtil.formatCamelToUnderline(viewRef);
-                            String viewType = getViewTypeFromXml(viewBindingType.getPresentableText(), viewId);
-
-                            if (viewType != null) {
-                                toReplace = variableName + "." + viewRef;
-                                if (!viewRef.endsWith("View")) {
-                                    viewRef += "View";
-                                }
-                                replace = viewRef;
-                                // create [TextView textView = binding.findViewById(R.id.text);]
-                                if (!currentFDVBIs.containsKey(replace)) {
-                                    String findViewByIdStatement = viewType + " " + replace + " = " + variableName + ".findViewById(R.id." + viewId + ");";
-                                    currentFDVBIs.put(replace, findViewByIdStatement);
-
-                                    addImport(ViewUtil.getViewClassPath(viewType));
-                                }
-                            }
-                        }
-                        if (!replace.equals(toReplace)) {
-                            String newStatement = e.getText().replaceAll(toReplace, replace);
-                            e.replace(mElementFactory.createStatementFromText(newStatement, null));
-                        }
-                    }
+                    replaceLocalBindingRefFromStatement(viewBindingType, localVariable, variableName, currentFDVBIs, e);
                 }
                 PsiElement completelyStatement = localVariable;
                 while (!currentFDVBIs.isEmpty() && completelyStatement != null) {
@@ -236,6 +204,47 @@ public class JavaBindingHunter {
         }
     }
 
+    private PsiStatement replaceLocalBindingRefFromStatement(PsiType viewBindingType, PsiLocalVariable localVariable, String variableName, HashMap<String, String> currentFDVBIs, PsiStatement e) {
+        if (e.getText().contains(variableName)
+                && !e.getText().contains(CLASS_NAME_DATA_BINDING_UTIL)
+                && !e.getText().contains(localVariable.getType().getPresentableText())) {
+
+            String replace = variableName;
+            String toReplace = variableName;
+            if (e.getText().contains(variableName + ".getRoot()")) {
+                toReplace = variableName + ".getRoot".concat("()");
+            } else if (e.getText().contains(variableName + ".")) {
+                String viewRef = getViewRefNameFromText(e.getText(), variableName);
+                String viewId = mBindingXmlInfo.get(viewBindingType.getPresentableText()).getIdByViewRefName(viewRef);
+                String viewType = mBindingXmlInfo.get(viewBindingType.getPresentableText()).getViewTypeByViewRefName(viewRef);
+
+                if (viewType != null) {
+                    toReplace = variableName + "." + viewRef;
+                    if (!viewRef.endsWith("View")) {
+                        viewRef += "View";
+                    }
+                    replace = viewRef;
+                    // create [TextView textView = binding.findViewById(R.id.text);]
+                    if (!currentFDVBIs.containsKey(replace)) {
+                        String findViewByIdStatement = viewType + " " + replace + " = " + variableName + ".findViewById(R.id." + viewId + ");";
+                        currentFDVBIs.put(replace, findViewByIdStatement);
+
+                        addImport(ViewUtil.getViewClassPath(viewType));
+                    }
+                }
+            }
+            if (!replace.equals(toReplace)) {
+                String newStatementText = e.getText().replace(toReplace, replace);
+                // maybe one statement contains multi binding references,so we should replace recursive
+                PsiStatement newStatement = replaceLocalBindingRefFromStatement(
+                        viewBindingType, localVariable, variableName, currentFDVBIs, mElementFactory.createStatementFromText(newStatementText, null));
+                e.replace(newStatement);
+                return newStatement;
+            }
+        }
+        return e;
+    }
+
     /**
      * get xxx from *binding.xxx*
      */
@@ -247,7 +256,7 @@ public class JavaBindingHunter {
         int end = start;
         for (int i = start; i < text.length(); i++) {
             char c = text.charAt(i);
-            if (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z') {
+            if (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c >= '0' && c <= '9') {
                 continue;
             }
             end = i;
@@ -278,13 +287,13 @@ public class JavaBindingHunter {
                         || integrity.getText().contains("()")) {
 //                        integrity.delete();
                 } else if (!integrity.getText().contains("\n")) {
-                    String viewKey = getRefName(parent);
-                    if (!mViewFields.containsKey(viewKey)) {
-                        createField(viewBindingType, viewKey, viewField);
-                        createFindViewByIdStatement(assignmentElement, ((PsiReferenceExpression) parent.getReference()).getQualifier().getText(), viewKey);
+                    String viewRefName = getRefName(parent);
+                    if (!mViewFields.containsKey(viewRefName)) {
+                        createField(viewBindingType, viewRefName, viewField);
+                        createFieldFindViewByIdStatement(assignmentElement, ((PsiReferenceExpression) parent.getReference()).getQualifier().getText(), viewRefName, viewBindingType);
                     }
-                    if (mViewFields.get(viewKey) != null) {
-                        parent.replace(mElementFactory.createReferenceFromText(mViewFields.get(viewKey), null));
+                    if (mViewFields.get(viewRefName) != null) {
+                        parent.replace(mElementFactory.createReferenceFromText(mViewFields.get(viewRefName), null));
                     }
                 }
             } else if (parent instanceof PsiBinaryExpression) {
@@ -293,12 +302,15 @@ public class JavaBindingHunter {
         }
     }
 
-    private void createFindViewByIdStatement(PsiElement assignmentElement, String viewRootText, String viewKey) {
+    private void createFieldFindViewByIdStatement(PsiElement assignmentElement, String viewRootText, String viewRefName, PsiType viewBindingType) {
         PsiElement completelyStatement = assignmentElement;
         while (completelyStatement != null) {
             if (completelyStatement instanceof PsiStatement && completelyStatement.getText().endsWith(";")) {
-                String findViewByIdStatement = mViewFields.get(viewKey) + " = " + viewRootText + ".findViewById(R.id." + StringUtil.formatCamelToUnderline(viewKey) + ");";
-                mClass.addAfter(mElementFactory.createStatementFromText(findViewByIdStatement, null), completelyStatement);
+                String viewId = mBindingXmlInfo.get(viewBindingType.getPresentableText()).getIdByViewRefName(viewRefName);
+                if (viewId != null) {
+                    String findViewByIdStatement = mViewFields.get(viewRefName) + " = " + viewRootText + ".findViewById(R.id." + viewId + ");";
+                    mClass.addAfter(mElementFactory.createStatementFromText(findViewByIdStatement, null), completelyStatement);
+                }
                 break;
             }
             completelyStatement = completelyStatement.getParent();
@@ -315,21 +327,21 @@ public class JavaBindingHunter {
         return null;
     }
 
-    private void createField(PsiType viewBindingClass, String text, PsiField viewField) {
+    private void createField(PsiType viewBindingClass, String viewRefName, PsiField bindingField) {
         String newField;
-        char firstChar = text.charAt(0);
-        newField = "m" + text.replaceFirst(String.valueOf(firstChar), StringUtils.upperCase(String.valueOf(firstChar)));
+        char firstChar = viewRefName.charAt(0);
+        newField = "m" + viewRefName.replaceFirst(String.valueOf(firstChar), StringUtils.upperCase(String.valueOf(firstChar)));
         if (!newField.endsWith("View")) {
             newField += "View";
         }
         if (isFieldExist(newField)) {
             newField += "2";
         }
-        mViewFields.put(text, newField);
+        mViewFields.put(viewRefName, newField);
 
-        PsiModifierList modifierList = viewField.getModifierList();
+        PsiModifierList modifierList = bindingField.getModifierList();
         String modifier = modifierList == null || TextUtils.isEmpty(modifierList.getText()) ? "" : modifierList.getText() + " ";
-        String type = getViewTypeFromXml(viewBindingClass.getPresentableText(), StringUtil.formatCamelToUnderline(text));
+        String type = mBindingXmlInfo.get(viewBindingClass.getPresentableText()).getViewTypeByViewRefName(viewRefName);
         if (type == null) return;
 
         String simpleType = type;
@@ -340,50 +352,6 @@ public class JavaBindingHunter {
         PsiField fieldFromText = mElementFactory.createFieldFromText(modifier + simpleType + " " + newField + ";", mClass);
         mClass.add(fieldFromText);
         addImport(ViewUtil.getViewClassPath(type));
-    }
-
-    @Nullable
-    private String getViewTypeFromXml(String viewBindingType, String id) {
-        int bindingIndex = viewBindingType.lastIndexOf("Binding");
-        if (bindingIndex == -1) {
-            throw new IllegalStateException("Error happened when handle " + mClass.getName() + ",maybe you have initial the layout more than once!");
-        }
-        if (!mBindingViewIdsMap.containsKey(viewBindingType)) {
-            String bindingLayoutName = viewBindingType.substring(0, bindingIndex);
-            String xmlName = StringUtil.formatCamelToUnderline(bindingLayoutName).concat(".xml");
-            PsiFile[] psiFiles = FilenameIndex.getFilesByName(mClass.getProject(), xmlName, GlobalSearchScope.allScope(mClass.getProject()));
-            if (psiFiles.length == 0) {
-                throw new IllegalStateException("Error happened when parse view id from layout " + xmlName + ",please rename the layout from xxx02 to xxx_02!");
-            }
-            PsiFile xmlFile = psiFiles[0];
-            mBindingViewIdsMap.put(viewBindingType, getIdsFromLayoutXml(xmlFile));
-        }
-        return mBindingViewIdsMap.get(viewBindingType).get(id);
-    }
-
-    private Map<String, String> getIdsFromLayoutXml(PsiElement xmlFile) {
-        HashMap<String, String> map = new HashMap<>();
-
-        for (PsiElement element : xmlFile.getChildren()) {
-            if (element instanceof XmlDocument) {
-                for (PsiElement tag : element.getChildren()) {
-                    getIdsFromAttrs(tag, map);
-                }
-            }
-        }
-        return map;
-    }
-
-    private void getIdsFromAttrs(PsiElement tag, HashMap<String, String> map) {
-        if (tag instanceof XmlTag) {
-            XmlAttribute id = ((XmlTag) tag).getAttribute("android:id", null);
-            if (id != null && id.getValue() != null) {
-                map.put(id.getValue().substring(id.getValue().indexOf("id/") + 3), ((XmlTag) tag).getName());
-            }
-            for (PsiElement child : tag.getChildren()) {
-                getIdsFromAttrs(child, map);
-            }
-        }
     }
 
     private boolean isFieldExist(String newField) {
@@ -432,9 +400,8 @@ public class JavaBindingHunter {
                             " inflate(@NonNull LayoutInflater inflater)");
                     return;
                 }
-                String bindingLayoutName = StringUtil.getClassNameFromPath(toReplace)
-                        .substring(0, StringUtil.getClassNameFromPath(toReplace).lastIndexOf("Binding"));
-                String layoutResource = "R.layout." + StringUtil.formatCamelToUnderline(bindingLayoutName);
+                String bindingLayoutName = StringUtil.getClassNameFromPath(toReplace);
+                String layoutResource = "R.layout." + mBindingXmlInfo.get(bindingLayoutName).getXmlFile().getName().replaceAll(".xml", "");
                 if (expressions.length == 1) {
                     inflateText.append(layoutResource).append("null, false)");
                 } else {

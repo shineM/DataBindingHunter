@@ -2,15 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c304abf-24c1-4957-b91b-a7986e27cdb4" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/me/texy/databindinghunter/LayoutXmlHunter.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/me/texy/databindinghunter/util/ViewUtil.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/me/texy/databindinghunter/LayoutXmlInfo.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/RemoveDatabinding/META-INF/plugin.xml" afterPath="$PROJECT_DIR$/out/production/RemoveDatabinding/META-INF/plugin.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/RemoveDatabinding/me/texy/databindinghunter/JavaBindingHunter.class" afterPath="$PROJECT_DIR$/out/production/RemoveDatabinding/me/texy/databindinghunter/JavaBindingHunter.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/RemoveDatabinding/me/texy/databindinghunter/action/RemoveDatabindingAction.class" afterPath="$PROJECT_DIR$/out/production/RemoveDatabinding/me/texy/databindinghunter/action/RemoveDatabindingAction.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/RemoveDatabinding/me/texy/databindinghunter/util/StringUtil.class" afterPath="$PROJECT_DIR$/out/production/RemoveDatabinding/me/texy/databindinghunter/util/StringUtil.class" />
+      <change beforePath="$PROJECT_DIR$/RemoveDatabinding.jar" afterPath="$PROJECT_DIR$/RemoveDatabinding.jar" />
       <change beforePath="$PROJECT_DIR$/resources/META-INF/plugin.xml" afterPath="$PROJECT_DIR$/resources/META-INF/plugin.xml" />
       <change beforePath="$PROJECT_DIR$/src/me/texy/databindinghunter/JavaBindingHunter.java" afterPath="$PROJECT_DIR$/src/me/texy/databindinghunter/JavaBindingHunter.java" />
+      <change beforePath="$PROJECT_DIR$/src/me/texy/databindinghunter/LayoutXmlHunter.java" afterPath="$PROJECT_DIR$/src/me/texy/databindinghunter/LayoutXmlHunter.java" />
       <change beforePath="$PROJECT_DIR$/src/me/texy/databindinghunter/action/RemoveDatabindingAction.java" afterPath="$PROJECT_DIR$/src/me/texy/databindinghunter/action/RemoveDatabindingAction.java" />
       <change beforePath="$PROJECT_DIR$/src/me/texy/databindinghunter/util/StringUtil.java" afterPath="$PROJECT_DIR$/src/me/texy/databindinghunter/util/StringUtil.java" />
     </list>
@@ -30,8 +27,8 @@
       <file leaf-file-name="RemoveDatabindingAction.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/me/texy/databindinghunter/action/RemoveDatabindingAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="77" column="45" lean-forward="true" selection-start-line="77" selection-start-column="45" selection-end-line="77" selection-end-column="45" />
+            <state relative-caret-position="-366">
+              <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -39,54 +36,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JavaFileType.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/com/intellij/ide/highlighter/JavaFileType.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="20" column="37" lean-forward="false" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FileBasedIndex.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/util/indexing/FileBasedIndex.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="31" column="38" lean-forward="false" selection-start-line="31" selection-start-column="38" selection-end-line="31" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Object.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/src.zip!/java/lang/Object.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="36" column="21" lean-forward="false" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
-              <folding>
-                <element signature="e#10065#10066#0" expanded="true" />
-                <element signature="e#10148#10149#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WriteCommandAction.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/openapi/command/WriteCommandAction.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="177" column="23" lean-forward="false" selection-start-line="177" selection-start-column="23" selection-end-line="177" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="StringUtil.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/me/texy/databindinghunter/util/StringUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="61" lean-forward="true" selection-start-line="17" selection-start-column="61" selection-end-line="17" selection-end-column="61" />
+            <state relative-caret-position="390">
+              <caret line="51" column="35" lean-forward="false" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CaseFormat.class" pinned="false" current-in-tab="false">
+        <entry file="jar://$APPLICATION_HOME_DIR$/lib/guava-21.0.jar!/com/google/common/base/CaseFormat.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="171">
+              <caret line="110" column="46" lean-forward="false" selection-start-line="110" selection-start-column="26" selection-end-line="110" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -95,8 +59,8 @@
       <file leaf-file-name="LayoutXmlHunter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/me/texy/databindinghunter/LayoutXmlHunter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+            <state relative-caret-position="180">
+              <caret line="20" column="20" lean-forward="true" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -107,10 +71,34 @@
       <file leaf-file-name="JavaBindingHunter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/me/texy/databindinghunter/JavaBindingHunter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state relative-caret-position="381">
+              <caret line="343" column="89" lean-forward="false" selection-start-line="343" selection-start-column="89" selection-end-line="343" selection-end-column="89" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HashMap.java" pinned="false" current-in-tab="false">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/src.zip!/java/util/HashMap.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="325">
+              <caret line="553" column="13" lean-forward="false" selection-start-line="553" selection-start-column="13" selection-end-line="553" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LayoutXmlInfo.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/me/texy/databindinghunter/LayoutXmlInfo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="34" column="5" lean-forward="true" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1552#1553#0" expanded="true" />
+                <element signature="e#1582#1583#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -119,8 +107,18 @@
       <file leaf-file-name="plugin.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/META-INF/plugin.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+            <state relative-caret-position="255">
+              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="18" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CompositeElement.class" pinned="false" current-in-tab="false">
+        <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/com/intellij/psi/impl/source/tree/CompositeElement.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="255" column="0" lean-forward="false" selection-start-line="255" selection-start-column="0" selection-end-line="255" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -157,6 +155,8 @@
       <find>modi</find>
       <find>formatCamelToUnderline</find>
       <find>getViewTy</find>
+      <find>replaceA</find>
+      <find>replaceAllV</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -186,9 +186,10 @@
         <option value="$PROJECT_DIR$/src/me/texy/databindinghunter/util/JavaBindingHunter.java" />
         <option value="$PROJECT_DIR$/src/me/texy/databindinghunter/StringUtil.java" />
         <option value="$PROJECT_DIR$/src/me/texy/databindinghunter/util/PsiUtil.java" />
-        <option value="$PROJECT_DIR$/src/me/texy/databindinghunter/LayoutXmlHunter.java" />
         <option value="$PROJECT_DIR$/src/me/texy/databindinghunter/util/ViewUtil.java" />
+        <option value="$PROJECT_DIR$/src/me/texy/databindinghunter/LayoutXmlHunter.java" />
         <option value="$PROJECT_DIR$/src/me/texy/databindinghunter/util/StringUtil.java" />
+        <option value="$PROJECT_DIR$/src/me/texy/databindinghunter/LayoutXmlInfo.java" />
         <option value="$PROJECT_DIR$/src/me/texy/databindinghunter/action/RemoveDatabindingAction.java" />
         <option value="$PROJECT_DIR$/src/me/texy/databindinghunter/JavaBindingHunter.java" />
         <option value="$PROJECT_DIR$/resources/META-INF/plugin.xml" />
@@ -203,10 +204,10 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="1573" />
-    <option name="y" value="-71" />
-    <option name="width" value="1680" />
-    <option name="height" value="877" />
+    <option name="x" value="1440" />
+    <option name="y" value="-180" />
+    <option name="width" value="1920" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -489,7 +490,7 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32718447" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3262136" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -497,7 +498,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291262" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32984293" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291262" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21354167" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -505,7 +506,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44368932" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43009707" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -525,7 +526,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="172" />
+      <option name="time" value="198" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -539,67 +540,53 @@
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
+        <expression-string>e.getText()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>parent.getText()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>xml.getParent().getPath()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>xml.getParent()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>xml.getPath()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>xml</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>filesByName[0].getParent()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>filesByName[0]</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
         <expression-string>integrity.getText().matches(&quot;.*.get.*\\)$&quot;)</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>statement.getChildren()[1].getChildren()[1].getChildren()[3].getChildren()[5].getChildren()[9].getChildren()[2].getChildren()[0].getChildren()[7].getText()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>statement.getChildren()[1].getChildren()[1].getChildren()[3].getChildren()[5].getChildren()[9].getChildren()[2].getChildren()[0].getChildren()[7]</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>statement.getChildren()[1].getChildren()[1].getChildren()[3].getChildren()[5].getChildren()[9].getChildren()[2].getChildren()[0].getChildren()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>statement.getChildren()[1].getChildren()[1].getChildren()[3].getChildren()[5].getChildren()[9].getChildren()[2].getChildren()[0]</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>statement.getChildren()[1].getChildren()[1].getChildren()[3].getChildren()[5].getChildren()[9].getChildren()[2].getChildren()[0].getText()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>statement.getChildren()[1].getChildren()[1].getChildren()[3].getChildren()[5].getChildren()[9].getChildren()[2].getChildren()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>statement.getChildren()[1].getChildren()[1].getChildren()[3].getChildren()[5].getChildren()[9].getChildren()[2]</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>statement.getChildren()[1].getChildren()[1].getChildren()[3].getChildren()[5].getChildren()[9].getChildren()</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/psi/PsiJavaParserFacade.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="14" column="38" lean-forward="false" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/openapi/editor/Document.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1485">
-          <caret line="115" column="9" lean-forward="false" selection-start-line="115" selection-start-column="9" selection-end-line="115" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/me/texy/databindinghunter/util/PsiFileUtil.java" />
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/psi/search/GlobalSearchScope.class">
       <provider selected="true" editor-type-id="text-editor">
@@ -707,166 +694,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="1047" column="0" lean-forward="false" selection-start-line="1047" selection-start-column="0" selection-end-line="1047" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/com/intellij/psi/impl/source/tree/CompositeElement.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8040">
-          <caret line="579" column="0" lean-forward="false" selection-start-line="579" selection-start-column="0" selection-end-line="579" selection-end-column="0" />
-          <folding>
-            <marker date="1545114281675" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1545114281675" expanded="false" signature="157:1918" ph="..." />
-            <marker date="1545114281675" expanded="true" signature="2635:2794" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="2845:3351" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="3386:4021" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="4053:4170" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="4235:4539" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="4617:4917" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="4996:5220" ph="{...}" />
-            <marker date="1545114281675" expanded="false" signature="5276:5287" ph=" { " />
-            <marker date="1545114281675" expanded="false" signature="5316:5322" ph=" }" />
-            <marker date="1545114281675" expanded="true" signature="5377:7095" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="7171:7281" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="7354:7465" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="7521:7942" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="8014:8218" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="8294:8797" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="8892:9177" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="9220:9407" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="9457:9608" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="9646:10100" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="9761:10066" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="9821:10056" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="10151:11291" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="11351:13353" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="13395:13640" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="13719:14648" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="13912:14611" ph="{...}" />
-            <marker date="1545114281675" expanded="false" signature="13965:13984" ph=" { " />
-            <marker date="1545114281675" expanded="false" signature="14005:14019" ph=" }" />
-            <marker date="1545114281675" expanded="true" signature="14074:14259" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="14328:14601" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="14730:14877" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="14938:15201" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="15246:15333" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="15406:15494" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="15569:16337" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="16471:17386" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="17521:18481" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="18539:18840" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="18900:19248" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="19350:19695" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="19757:19886" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="19982:20204" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="20237:20852" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="20874:21160" ph="{...}" />
-            <marker date="1545114281675" expanded="false" signature="21194:21205" ph=" { " />
-            <marker date="1545114281675" expanded="false" signature="21232:21238" ph=" }" />
-            <marker date="1545114281675" expanded="true" signature="21322:21742" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="21780:22444" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="22511:22669" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="22731:22946" ph="{...}" />
-            <marker date="1545114281675" expanded="false" signature="22990:23001" ph=" { " />
-            <marker date="1545114281675" expanded="false" signature="23036:23042" ph=" }" />
-            <marker date="1545114281675" expanded="false" signature="23086:23097" ph=" { " />
-            <marker date="1545114281675" expanded="false" signature="23120:23126" ph=" }" />
-            <marker date="1545114281675" expanded="false" signature="23169:23180" ph=" { " />
-            <marker date="1545114281675" expanded="false" signature="23202:23208" ph=" }" />
-            <marker date="1545114281675" expanded="true" signature="23261:23348" ph="{...}" />
-            <marker date="1545114281675" expanded="false" signature="23398:23409" ph=" { " />
-            <marker date="1545114281675" expanded="false" signature="23436:23442" ph=" }" />
-            <marker date="1545114281675" expanded="true" signature="23531:24499" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="24093:24485" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="24169:24475" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="24602:25014" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="25065:25192" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="25246:25374" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="25458:25624" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="25709:26621" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="26300:26597" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="26380:26583" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="26699:28556" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="26958:27255" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="27034:27245" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="27388:28476" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="27468:28462" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="28594:28747" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="28838:29036" ph="{...}" />
-            <marker date="1545114281675" expanded="false" signature="29094:29105" ph=" { " />
-            <marker date="1545114281675" expanded="false" signature="29127:29133" ph=" }" />
-            <marker date="1545114281675" expanded="true" signature="29172:29653" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="29713:29995" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="29908:29987" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="30065:30209" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="30254:30525" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="30575:30685" ph="{...}" />
-            <marker date="1545114281675" expanded="false" signature="30716:30727" ph=" { " />
-            <marker date="1545114281675" expanded="false" signature="30749:30755" ph=" }" />
-            <marker date="1545114281675" expanded="true" signature="30822:30991" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="31072:32218" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="32259:32399" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="32496:32731" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="32844:33088" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="33197:33510" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="33633:33894" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="34006:34238" ph="{...}" />
-            <marker date="1545114281675" expanded="false" signature="34299:34310" ph=" { " />
-            <marker date="1545114281675" expanded="false" signature="34358:34364" ph=" }" />
-            <marker date="1545114281675" expanded="true" signature="34459:35007" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="34636:34909" ph="{...}" />
-            <marker date="1545114281675" expanded="true" signature="34716:34895" ph="{...}" />
-            <marker date="1545114281675" expanded="false" signature="35047:35058" ph=" { " />
-            <marker date="1545114281675" expanded="false" signature="35081:35087" ph=" }" />
-            <marker date="1545114281675" expanded="false" signature="35126:35137" ph=" { " />
-            <marker date="1545114281675" expanded="false" signature="35159:35165" ph=" }" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/guava-21.0.jar!/com/google/common/base/CaseFormat.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="12" column="24" lean-forward="false" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
-          <folding>
-            <marker date="1514223134000" expanded="false" signature="0:104" ph="/.../" />
-            <marker date="1514223134000" expanded="false" signature="146:253" ph="..." />
-            <marker date="1514223134000" expanded="true" signature="338:752" ph="{...}" />
-            <marker date="1514223134000" expanded="false" signature="381:396" ph=" { " />
-            <marker date="1514223134000" expanded="false" signature="427:437" ph=" }" />
-            <marker date="1514223134000" expanded="true" signature="491:746" ph="{...}" />
-            <marker date="1514223134000" expanded="true" signature="801:1193" ph="{...}" />
-            <marker date="1514223134000" expanded="false" signature="844:859" ph=" { " />
-            <marker date="1514223134000" expanded="false" signature="890:900" ph=" }" />
-            <marker date="1514223134000" expanded="true" signature="954:1187" ph="{...}" />
-            <marker date="1514223134000" expanded="true" signature="1246:1365" ph="{...}" />
-            <marker date="1514223134000" expanded="false" signature="1289:1304" ph=" { " />
-            <marker date="1514223134000" expanded="false" signature="1349:1359" ph=" }" />
-            <marker date="1514223134000" expanded="true" signature="1418:1537" ph="{...}" />
-            <marker date="1514223134000" expanded="false" signature="1461:1476" ph=" { " />
-            <marker date="1514223134000" expanded="false" signature="1521:1531" ph=" }" />
-            <marker date="1514223134000" expanded="true" signature="1586:1997" ph="{...}" />
-            <marker date="1514223134000" expanded="false" signature="1629:1644" ph=" { " />
-            <marker date="1514223134000" expanded="false" signature="1675:1685" ph=" }" />
-            <marker date="1514223134000" expanded="true" signature="1739:1991" ph="{...}" />
-            <marker date="1514223134000" expanded="true" signature="2156:2249" ph="{...}" />
-            <marker date="1514223134000" expanded="true" signature="2309:2466" ph="{...}" />
-            <marker date="1514223134000" expanded="true" signature="2516:3235" ph="{...}" />
-            <marker date="1514223134000" expanded="true" signature="3311:3385" ph="{...}" />
-            <marker date="1514223134000" expanded="true" signature="3487:3583" ph="{...}" />
-            <marker date="1514223134000" expanded="true" signature="3645:3765" ph="{...}" />
-            <marker date="1514223134000" expanded="true" signature="3872:5184" ph="{...}" />
-            <marker date="1514223134000" expanded="true" signature="4100:4283" ph="{...}" />
-            <marker date="1514223134000" expanded="false" signature="4329:4344" ph=" { " />
-            <marker date="1514223134000" expanded="false" signature="4394:4404" ph=" }" />
-            <marker date="1514223134000" expanded="false" signature="4451:4466" ph=" { " />
-            <marker date="1514223134000" expanded="false" signature="4516:4526" ph=" }" />
-            <marker date="1514223134000" expanded="true" signature="4583:4927" ph="{...}" />
-            <marker date="1514223134000" expanded="false" signature="4958:4973" ph=" { " />
-            <marker date="1514223134000" expanded="false" signature="5040:5050" ph=" }" />
-            <marker date="1514223134000" expanded="false" signature="5084:5099" ph=" { " />
-            <marker date="1514223134000" expanded="false" signature="5168:5178" ph=" }" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1062,8 +889,8 @@
         <state relative-caret-position="15">
           <caret line="36" column="21" lean-forward="false" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
           <folding>
-            <element signature="e#10065#10066#0" expanded="true" />
-            <element signature="e#10148#10149#0" expanded="true" />
+            <element signature="e#10065#10066#0" expanded="false" />
+            <element signature="e#10148#10149#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1100,44 +927,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/texy/databindinghunter/util/StringUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="61" lean-forward="true" selection-start-line="17" selection-start-column="61" selection-end-line="17" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/texy/databindinghunter/action/RemoveDatabindingAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="77" column="45" lean-forward="true" selection-start-line="77" selection-start-column="45" selection-end-line="77" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/texy/databindinghunter/LayoutXmlHunter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/me/texy/databindinghunter/JavaBindingHunter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/me/texy/databindinghunter/HuntingRecord.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -1146,10 +935,84 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/src.zip!/java/util/HashMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="553" column="13" lean-forward="false" selection-start-line="553" selection-start-column="13" selection-end-line="553" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/guava-21.0.jar!/com/google/common/base/CaseFormat.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="110" column="46" lean-forward="false" selection-start-line="110" selection-start-column="26" selection-end-line="110" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/me/texy/databindinghunter/util/StringUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="51" column="35" lean-forward="false" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/me/texy/databindinghunter/LayoutXmlHunter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="20" column="20" lean-forward="true" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/me/texy/databindinghunter/action/RemoveDatabindingAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-366">
+          <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/com/intellij/psi/impl/source/tree/CompositeElement.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="255" column="0" lean-forward="false" selection-start-line="255" selection-start-column="0" selection-end-line="255" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/me/texy/databindinghunter/JavaBindingHunter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="343" column="89" lean-forward="false" selection-start-line="343" selection-start-column="89" selection-end-line="343" selection-end-column="89" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/me/texy/databindinghunter/LayoutXmlInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="34" column="5" lean-forward="true" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1552#1553#0" expanded="true" />
+            <element signature="e#1582#1583#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/META-INF/plugin.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+        <state relative-caret-position="255">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="18" selection-end-column="38" />
           <folding />
         </state>
       </provider>

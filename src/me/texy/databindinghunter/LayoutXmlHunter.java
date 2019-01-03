@@ -18,12 +18,12 @@ public class LayoutXmlHunter {
 
     }
 
-    public void hunt() {
+    public boolean hunt() {
         PsiElement layoutElement = mXmlFile.getChildren()[0].getChildren()[1];
-        if (layoutElement == null) return;
+        if (layoutElement == null) return false;
 
         PsiElement[] children = layoutElement.getChildren();
-        if (children.length < 2 || !children[1].getText().equals("layout")) return;
+        if (children.length < 2 || !children[1].getText().equals("layout")) return false;
 
 
         for (int i = 0; i < children.length; i++) {
@@ -38,5 +38,6 @@ public class LayoutXmlHunter {
                 break;
             }
         }
+        return true;
     }
 }

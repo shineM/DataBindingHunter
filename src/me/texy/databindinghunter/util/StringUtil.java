@@ -48,4 +48,12 @@ public class StringUtil {
         }
         return s;
     }
+
+    public static String formatUnderlineToCamel(String s) {
+        return CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, s);
+    }
+
+    public static String formatUnderlineToLowerCamel(String s) {
+        return CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, s);
+    }
 }

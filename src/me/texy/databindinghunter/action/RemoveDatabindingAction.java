@@ -25,12 +25,11 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.indexing.FileBasedIndex;
 import me.texy.databindinghunter.JavaBindingHunter;
 import me.texy.databindinghunter.LayoutXmlHunter;
+import me.texy.databindinghunter.LayoutXmlInfo;
 import me.texy.databindinghunter.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class RemoveDatabindingAction extends AnAction {
 
@@ -58,9 +57,9 @@ public class RemoveDatabindingAction extends AnAction {
                     StringBuilder stringBuilder = new StringBuilder();
                     try {
                         for (VirtualFile main : mainDirs) {
-                            huntJava(progressIndicator, main, project, stringBuilder);
+                            HashMap<String, LayoutXmlInfo> bindingLayouts = huntLayoutXml(progressIndicator, main, project);
                             progressIndicator.setFraction(0.5f);
-                            huntLayoutXml(progressIndicator, main, project);
+                            huntJava(progressIndicator, main, project, stringBuilder, bindingLayouts);
                         }
                     } catch (Exception e) {
                         showErrorMsg(project, "actionPerformed error", e);
@@ -73,7 +72,7 @@ public class RemoveDatabindingAction extends AnAction {
 
     }
 
-    private void huntJava(@NotNull ProgressIndicator progressIndicator, VirtualFile third, Project project, StringBuilder stringBuilder) {
+    private void huntJava(@NotNull ProgressIndicator progressIndicator, VirtualFile third, Project project, StringBuilder stringBuilder, HashMap<String, LayoutXmlInfo> bindingLayouts) {
         Collection<VirtualFile> javaFiles = FileBasedIndex.getInstance().getContainingFiles(FileTypeIndex.NAME, JavaFileType.INSTANCE, GlobalSearchScopes.directoryScope(project, third, true));
         for (VirtualFile clazz : javaFiles) {
             progressIndicator.setText("processing " + clazz.getName());
@@ -82,8 +81,8 @@ public class RemoveDatabindingAction extends AnAction {
 
             if (psiClass != null) {
                 try {
-                    JavaBindingHunter javaBindingHunter = new JavaBindingHunter(psiClass);
-                    if (javaBindingHunter.hunt()){
+                    JavaBindingHunter javaBindingHunter = new JavaBindingHunter(psiClass, bindingLayouts);
+                    if (javaBindingHunter.hunt()) {
                         stringBuilder.append(psiClass.getName()).append("\n");
                     }
                 } catch (Exception e) {
@@ -101,19 +100,25 @@ public class RemoveDatabindingAction extends AnAction {
         Messages.showErrorDialog(project, message.toString(), "Exception threw when handle " + fileName);
     }
 
-    private void huntLayoutXml(@NotNull ProgressIndicator progressIndicator, VirtualFile third, Project project) {
+    private HashMap<String, LayoutXmlInfo> huntLayoutXml(@NotNull ProgressIndicator progressIndicator, VirtualFile third, Project project) {
         Collection<VirtualFile> xmlFiles = FileBasedIndex.getInstance().getContainingFiles(FileTypeIndex.NAME, XmlFileType.INSTANCE, GlobalSearchScopes.directoryScope(project, third, true));
+        HashMap<String, LayoutXmlInfo> bindingLayouts = new HashMap<>();
         for (VirtualFile xml : xmlFiles) {
+            if (!xml.getParent().getPath().endsWith("layout")) continue;
+
             progressIndicator.setText("processing " + xml.getName());
             PsiFile[] filesByName = FilenameIndex.getFilesByName(project, xml.getName(), GlobalSearchScopes.directoryScope(project, xml.getParent(), false));
-            LayoutXmlHunter xmlHunter = new LayoutXmlHunter(filesByName[0]);
             try {
+                LayoutXmlHunter xmlHunter = new LayoutXmlHunter(filesByName[0]);
                 xmlHunter.hunt();
+                String xmlName = filesByName[0].getName();
+                // we can not calculate the camel to underline,such as Demo01 maybe demo_01 or demo_0_1,but we can do it reversely.
+                bindingLayouts.put(StringUtil.formatUnderlineToCamel(xmlName.replaceAll(".xml", "")) + "Binding", new LayoutXmlInfo(filesByName[0]));
             } catch (Exception e) {
                 showErrorMsg(project, xml.getName(), e);
             }
         }
-
+        return bindingLayouts;
     }
 
     @Override

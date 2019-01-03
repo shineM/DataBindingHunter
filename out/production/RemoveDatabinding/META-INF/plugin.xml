@@ -1,16 +1,23 @@
 <idea-plugin>
   <id>me.texy.databindinghunter</id>
   <name>Remove DataBinding</name>
-  <version>1.0</version>
+  <version>1.0.1</version>
   <vendor email="zhongxinyuann@gmail.com" url="https://github.com/shineM">shineM</vendor>
 
   <description><![CDATA[
       A plugin to help removing databinding from your Android Project.<br>
+      How to use: Click 「Code」 -> Click 「Remove DataBinding」<br>
+
     ]]></description>
 
   <change-notes><![CDATA[
-      - remove layout and data tag<br>
+    1.0.0<br>
+      - remove xml's layout and data tags<br>
       - replace DataBindingUtil.bind/inflate with LayoutInflater.inflate<br>
+    1.0.1<br>
+      - fix parsing error when layout or id contains number. <br>
+      - fix some others bad cases.<br>
+
     ]]>
   </change-notes>
 
